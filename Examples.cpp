@@ -3,10 +3,9 @@
 #include <cmath>
 using namespace std;     
 
-
 int main()
 {
-	setlocale(LC_ALL, "Russian");
+	//setlocale(LC_ALL, "Russian");
 	double a, b;
 	char sign;
 	cout << " Enter  first number:\n";
@@ -15,7 +14,6 @@ int main()
 	cin >> sign;
 	cout << " Enter  second number:\n";
 	cin >> b;
-	
 	
 	switch (sign)
 	{
