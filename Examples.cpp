@@ -1,41 +1,31 @@
 ﻿#define _USE_MATH_DEFINES
 #include <iostream>
+#include <windows.h>
 #include <cmath>
+#include <ctime>
 using namespace std;     
 
 int main()
 {
-	//setlocale(LC_ALL, "Russian");
-	double a, b;
-	char sign;
-	cout << " Enter  first number:\n";
-	cin >> a;
-	cout << " Enter  sign for solution: (example:+, -, *, /)\n";
-	cin >> sign;
-	cout << " Enter  second number:\n";
-	cin >> b;
-	
-	switch (sign)
-	{
-	case '+':
-		cout << " Result of addition:\n" << a + b;
-		break;
-	case '-':
-		cout << " Result of deduction:\n" << a - b;
-		break;
-	case '*':
-		cout << " Result of multiplication:\n" << a * b;
-		break;
-	case '/':
-		if (b != 0)
-			cout << " Result of division:\n" << a / b;
-		else
-			cout << " ERROR:Division on zero!\n";
-		break;
+	int64_t F1 = 1;
+	int64_t F2 = 0;
+	int64_t FibonacciNumber = 0;
+	const int size = 50;
+	int64_t arr[size];
+	int num = 0;
 
-	default:
-		cout << " Incorrect sign\n";
-		break;
+	for (int i = 0; i < size; i++) {
+		FibonacciNumber = F1 + F2;
+		arr[i] = FibonacciNumber;
+		F1 = F2;
+		F2 = FibonacciNumber;
 	}
-			
+	cout << "How many elements do you want to see (0-50):" << endl;
+	cin >> num;
+	cout << endl;
+	cout << num << " Fibonacci Numbers: " << endl;
+	for (int i = 0; i < num; i++) {
+		cout << arr[i] << endl;
+	}
+	
 }
