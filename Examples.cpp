@@ -7,25 +7,29 @@ using namespace std;
 
 int main()
 {
-	int64_t F1 = 1;
-	int64_t F2 = 0;
-	int64_t FibonacciNumber = 0;
-	const int size = 50;
-	int64_t arr[size];
 	int num = 0;
+		 int64_t result = 1;
+		 const int size = 11;
+		 int arr[size];
+		 int64_t fact = 1;
 
-	for (int i = 0; i < size; i++) {
-		FibonacciNumber = F1 + F2;
-		arr[i] = FibonacciNumber;
-		F1 = F2;
-		F2 = FibonacciNumber;
+	for (int i = 1; i < size; i++){
+			 result = result * i;
+			 arr[i] = result;
 	}
-	cout << "How many elements do you want to see (0-50):" << endl;
-	cin >> num;
-	cout << endl;
-	cout << num << " Fibonacci Numbers: " << endl;
-	for (int i = 0; i < num; i++) {
-		cout << arr[i] << endl;
-	}
+		for (int j = 0; j < size; ++j){
+			if (j == 0){
+			  cout << j << "-" << 0 << endl;
+					 j++;
+			}
+			  cout << j <<"-" << arr[j] << endl;
+		}
+
+cout << "Enter your number (0-20): " << endl;
+			 cin >> num;
+			 for (int i = 1; i <= num; i++) {
+				 fact = fact * i;
+			 }
+			 cout << "The factorial of number " << num << " is: " << fact <<endl;
 	
 }
