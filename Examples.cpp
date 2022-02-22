@@ -4,19 +4,23 @@
 #include <cmath>
 #include <ctime>
 using namespace std;     
-int Rows = 5;
-int Cols = 5;
-int arr[5][5];
-int main()
-{
-		 for (int i = 0; i < Rows; i++) {
-			 for (int j = 0; j < Cols; j++)
-				 arr[i][j] = rand() % 5 ;
-		 }
-		 cout << endl << "Pseudorandom matrix:" << endl;
-		   for (int i = 0; i < Rows; i++) {
-			   for (int j = 0; j < Cols; j++)
-				 cout << arr[i][j] << " ";
-				 cout << endl;
-		   }		  
+
+int a, b, c, d;
+int det(int a, int b, int c, int d) {
+	return a * d - b * c;
+}
+int main() {
+	cout << "Enter:" << endl << "a, b" << endl << "c, d " << endl;
+	cout << "a = ";
+	cin >> a;
+	cout << "b = ";
+	cin >> b;
+	cout << "c = ";
+	cin >> c;
+	cout << "d = ";
+	cin >> d;
+	int A = det(a, b, c, d);
+	cout << "The determinant of your matrix: " << endl;
+	cout << a << " " << b << endl << c << " " << d << endl;
+	cout << "Equals: " << A << endl;
 }
