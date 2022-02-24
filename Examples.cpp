@@ -5,60 +5,36 @@
 #include <ctime>
 using namespace std;     
 
-const int n = 3;
-int i, j, k;
-int matrix_A[n][n];
-int matrix_B[n][n];
-int matrix_C[n][n];
-
-int main()
-{
-	cout << "Variant with set value. " << endl;
-	cout << "Matrix A: " << endl << "\t 3, 1, 1\n" << "\t 0, 2, 5\n" << "\t 1, 2, 3\n" << endl;
-	cout << "Matrix B: " << endl << "\t 4, 5, 1\n" << "\t 0, 2, 2\n" << "\t 1, 6, 4\n"<< endl;
-	cout << "Matrix C = A * B: ";
-	int Matrix_A[3][3] = { {3, 1, 1}, {0, 2, 5}, {1, 2, 3} };
-	int Matrix_B[3][3] = { {4, 5, 1}, {0, 2, 2}, {1, 6, 4} };
-	int Matrix_C[3][3] = { {0, 0, 0}, {0, 0, 0}, {0, 0, 0} };
-
-	for (int i = 0; i < 3; i++) {
-		cout << endl;
-		cout << "\t";
-		for (int j = 0; j < 3; j++) {
-			for (int k = 0; k < 3; k++) {
-				Matrix_C[i][j] += Matrix_A[i][k] * Matrix_B[k][j];
-			}
-			cout << Matrix_C[i][j] << "  ";
-		}
-	}
-	cout << endl;
-
-	cout << "Variant with your numbers. " << endl;
-	cout << "Matrix A: " << endl;
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
-			cin >> matrix_A[i][j];
-	}
-	cout << "Matrix B: " << endl;
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
-			cin >> matrix_B[i][j];
-
-	}
-	cout << endl;
-	cout << "Matrix C = A * B: ";
-	for (int i = 0; i < n; i++)
-	{
-		cout << endl;
-		for (int j = 0; j < n; j++) {
-			matrix_C[i][j] = 0;
-
-			for (int k = 0; k < n; k++)
-				matrix_C[i][j] += matrix_A[i][k] * matrix_B[k][j];
-			cout << matrix_C[i][j] << " ";
-		}
-	}
+struct Participant {
+	int id;
+	char name[10] = "";
+	char secondName [15] = "";
+	int age;
+	double weight;
+	int birthYear;
+	char education [11] = "";
+};
+void printInformation(Participant info) {
+	cout << "Participant number:" << info.id << endl;
+	cout << "Name:" << info.name<< endl;
+	cout << "Second name:" << info.secondName<< endl;
+	cout << "Age:" << info.age<< endl;
+	cout << "Weight:" << info.weight<< endl;
+	cout << "Year of birth:" << info.birthYear<< endl;
+	cout << "Education:" << info.education << endl;
 	cout << endl;
 }
+
+int main()
+{	
+	Participant Sergey = {1,"Sergey","Asauliak",32,79.5,1989,"bachelor"};
+	Participant Ivan = {2,"Ivan","Kostopravov",44,98.3,1977,"secondary"};
+	Participant Aleksey = {3,"Aleksey","Petrov",20,69.4,2001,"master"};
+
+	printInformation(Sergey);
+	printInformation(Ivan);
+	printInformation(Aleksey);
+
+	
+}
+
