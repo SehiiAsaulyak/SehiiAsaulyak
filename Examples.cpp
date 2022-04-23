@@ -2,137 +2,79 @@
 #include<fstream>
 #include <string>
 #include<windows.h>
+#include<vector>
 #include<memory>
+#include<algorithm>
+#include<numeric>
+#include<ctime>
+#include<conio.h>
+
 using namespace std;     	
 
-struct Node {
-	int data;
-	Node* next;
-};
-class List
-{
-private:
-	Node* m_head;
-	int count = 0;
-public:
-	List() {
-		m_head = nullptr;
-	};
-	void push_back(int newdata) {
-		Node* elem = new Node();
-		elem->data = newdata;
-		elem->next = nullptr;
-		if (m_head == nullptr) {
-			m_head = elem;
-		}
-		else {
-			Node* temp = m_head;
-			while (temp->next!=nullptr) {
-				temp = temp->next;
-			}
-			temp->next = elem;
-		}
-		count++;
-}
-	void push_front(int newdata) {
-		Node* elem = new Node();
-		elem->data = newdata;
-		elem->next = m_head;
-		m_head = elem;
-		count++;
-	}
-	int push_at(int index,int newdata) {
-		
-		Node* previous = m_head;
-		for (int i = 0; i < index - 1; i++)
+void map_show(int map[3][3]) {
+	system("cls");
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
 		{
-			previous = previous->next;
+			cout << map[j][i] << " \t";
 		}
-		Node* elem = new Node();
-		Node* temp = previous->next;
-		previous->next = elem;
-		elem->next = temp;
-		elem->data = newdata;
-		return temp->data;
+		cout << endl << endl;
 	}
-	void pop_back() {
-		remove_at(count - 1);
-	}
-	void remove_at(int index) {
-		if (index == 0) {
-			pop_front();
+}
+bool game_over(int map[3][3],int var){
+	int count1 = 0; int count2 = 0; int count3 = 0; int count4 = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if (map[j][i] == var) count1++;
+			if (map[i][j] == var) count2++;
+			if (map[j][j] == var) count3++;
+			if (map[2 - j][j] == 1) count4++;
 		}
-		else {
-			Node* previous = m_head;
-			for (int i = 0; i < index - 1; i++)
-			{
-				previous = previous->next;
-			}
-			Node* temp = previous->next;
-			previous->next = temp->next;
-			delete temp;
-			count--;
-		}
-		
+		if (count1 == 3 || count2 == 3 || count3 == 3 || count4 == 3) { return true; break;}
+		count1 = count2= count3= count4=0;
 	}
-	void pop_front() {
-		Node* temp = m_head;
-		m_head = m_head->next;
-		delete temp;
-		count--;
+	return false;
+}
+void pc_step(int map[3][3]) {
+	int x = 0;int y=0;
+	if (map[x][y] != 2 || map[x][y] != 1) {
+	cout << "Computer point:" << endl;
+	Sleep(1500);
+	
+		do {
+			x = rand() % 3;
+			y = rand() % 3;
+		} while (map[x][y] != 0);
+		map[x][y] = 2;
 	}
-	void clear() {
-		while (count) {
-			pop_front();
-		}
+	else pc_step(map);
+}
+void human_step(int map[3][3]) {
+	int x, y;
+	cout << "Your point (x->,y^):" << endl;
+	cin >> x >> y;
+	if(map[x][y] != 1&& map[x][y] != 2)
+	map[x][y] = 1;
+	else {
+		cout << "This point is not empty!Try again"<<endl;
+		human_step(map);
 	}
-	void print_list() {
-		Node* temp = m_head;
-		while (temp != nullptr) {
-			cout << temp->data<<" ";
-			temp = temp->next;
-		}
-		cout << endl;
-	}
-	int get_count() {
-		return count;
-	}
-	int get_index_data(int index) {
-		int counter=0;
-		Node *temp = m_head;
-		while (temp != nullptr) {
-			if (counter == index) {
-				cout<< "Number with index " << index << " is: ";
-				return temp->data;
-			}
-			temp = temp->next;
-			counter++;
-		}
-	}
-	~List() {
-		clear();
-	};
-};
-
-
+}
 int main()
 {
-	List lst;
-	lst.push_back(5);
-	lst.push_back(1);
-	lst.push_back(7);
-	lst.push_back(8);
-	lst.print_list();
-	lst.push_at(3,20);
-	lst.print_list();
-
-	/*lst.pop_back();
-	lst.print_list();*/
-	/*lst.pop_front();
-	lst.print_list();
-	cout<<lst.get_count();
-	lst.clear();
-	lst.print_list();*/
-	/*cout << lst.get_count()<<endl;
-	cout << lst.get_index_data(1);*/
+	int map[3][3]={0};
+	srand(time(NULL));
+	while (true) {
+		 map_show(map);
+		 human_step(map);
+		 map_show(map);
+		 if (game_over(map,1) == true) { cout << "You win!" << endl; break; }
+		 pc_step(map);
+		 map_show(map);
+		 if (game_over(map,2) == true) {  cout << "You lost..." << endl; break; }
+	}
+	return 0;
 }
